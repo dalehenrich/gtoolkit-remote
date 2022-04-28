@@ -60,7 +60,7 @@ GtRemotePhlowViewedObject >> getViewDeclaration: viewSelector [
 { #category : #'api - accessing' }
 GtRemotePhlowViewedObject >> getViewDeclarationForView: aDeclarativeView [
 
-	PharoLinkAnswerByValue setByValueOnly.
+	(Rowan classNamed: 'PharoLinkAnswerByValue') setByValueOnly.
 	^ aDeclarativeView asDictionaryForExport
 ]
 
@@ -70,7 +70,7 @@ GtRemotePhlowViewedObject >> getViewsDeclarations [
 	viewDeclarations := (self declarativeViewsBySelector 
 		collect: [ :declarativeView |
 			self getViewDeclarationForView: declarativeView ]).
-	PharoLinkAnswerByValue setByValueOnly.
+	(Rowan classNamed: 'PharoLinkAnswerByValue') setByValueOnly.
 	^ Dictionary new
 		at: 'views' put: viewDeclarations asArray;
 		yourself
@@ -112,7 +112,7 @@ GtRemotePhlowViewedObject >> phlowDeclarativeViews [
 	views := object gtDeclarativePhlowViews.
 	views 
 		detect: [ :each | each title = 'Raw' ]
-		ifNone: [ views add: (object gtRemoteGtRawFor: GtPhlowView empty) ].
+		ifNone: [ views add: (object gtRemoteGtRawFor: (Rowan classNamed: 'GtPhlowView') empty) ].
 	
 	^ views
 ]
